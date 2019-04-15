@@ -36,7 +36,7 @@ def oneFix(srcPath):
         num = num+1
         ret,binary =cv2.threshold(cv2.cvtColor(frame,cv2.COLOR_RGB2GRAY),245,255,cv2.THRESH_BINARY)
         hist = srcBinary-binary
-        if hist.sum()<50000 and num>-1:
+        if hist.sum()<100000 and num>-1:
             print num
             outVideo.write(tmpFrame)
         else:
@@ -62,7 +62,7 @@ def oneCheck(srcPath):
         num = num+1
         ret,binary =cv2.threshold(cv2.cvtColor(frame,cv2.COLOR_RGB2GRAY),245,255,cv2.THRESH_BINARY)
         hist = srcBinary-binary
-        if hist.sum()<50000:
+        if hist.sum()<100000 and num>-1:
             context=str(num).encode('utf-8')
             tempFile = io.open(tempPath,mode='wb+')
             tempFile.write(context+'\r\n')
@@ -82,3 +82,5 @@ if args.p:
             tempPath = os.path.join(dirpath, filepath)
             if filepath[-4:]=='.mp4' or filepath[-4:]=='.MP4':
                 oneFix(tempPath)
+
+#oneCheck('D:\\Download\\Temp\\Sekiro 2019.03.22 - 13.44.24.02.avi')
