@@ -27,7 +27,7 @@ def oneFix(srcPath):
     size = (int(srcVideo.get(cv2.CAP_PROP_FRAME_WIDTH)),int(srcVideo.get(cv2.CAP_PROP_FRAME_HEIGHT))) 
     outVideo = cv2.VideoWriter(outPath,cv2.cv2.VideoWriter_fourcc('D', 'I', 'V', 'X'), fps, size)
 
-    srcImg = cv2.imread('D:\\Download\\testPic.jpg')
+    srcImg = cv2.imread('D:\\Download\\Temp\\testPic.jpg')
     srcRet,srcBinary =cv2.threshold(cv2.cvtColor(srcImg,cv2.COLOR_RGB2GRAY),245,255,cv2.THRESH_BINARY)
 
     num = -2
@@ -36,7 +36,7 @@ def oneFix(srcPath):
         num = num+1
         ret,binary =cv2.threshold(cv2.cvtColor(frame,cv2.COLOR_RGB2GRAY),245,255,cv2.THRESH_BINARY)
         hist = srcBinary-binary
-        if hist.sum()<50000:
+        if hist.sum()<50000 and num>-1:
             print num
             outVideo.write(tmpFrame)
         else:
